@@ -1,0 +1,4 @@
+<div class="round-image round-image-<%= size %>">
+  <% img_style = (size > 100) ? :medium : :thumb %>
+  <%= image_tag(current_user.avatar.url(img_style)) %>
+</div>

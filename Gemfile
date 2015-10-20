@@ -56,3 +56,13 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+
+## For uploads
+gem "paperclip"
+
+# For Amazon image hosting
+#gem 'aws-sdk'
+gem 'aws-sdk-v1'
+
+## For image resizing, depends on Imagemagick which is a C program
+gem "mini_magick"

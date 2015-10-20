@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .round-image{
+    background-color: white;
+    border: 1px solid #d9d9d9; 
+    overflow: hidden;
+    text-align: center;
+    img { width: 100% }
+ }
+ .round-image-50 {
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    height: 50px;
+    width: 50px;
+}
+.round-image-100 {
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    height: 100px;
+    width: 100px;
+}
+.round-image-300 {
+    border-radius: 150px;
+    -moz-border-radius: 150px;
+    -webkit-border-radius: 150px;
+    height: 300px;
+    width: 300px;
+}
+.nav-pic-dropdown{
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+.user_index{
+  float: left;
+  margin: 10px;
+}
