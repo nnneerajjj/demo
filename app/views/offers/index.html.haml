@@ -1,0 +1,34 @@
+.page-header
+  = link_to new_offer_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Offer
+  %h1 Listing offers
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th Product
+        %th Discount percent
+        %th Start time
+        %th Duration
+        %th Duration type
+        %th Repeat
+        %th End time
+        %th
+        %th
+        %th
+
+    %tbody
+      - @offers.each do |offer|
+        %tr
+          %td= offer.product
+          %td= offer.discount_percent
+          %td= offer.start_time
+          %td= offer.duration
+          %td= offer.duration_type
+          %td= offer.repeat
+          %td= offer.end_time
+          %td= link_to 'Show', offer
+          %td= link_to 'Edit', edit_offer_path(offer)
+          %td= link_to 'Destroy', offer, data: { confirm: 'Are you sure?' }, method: :delete

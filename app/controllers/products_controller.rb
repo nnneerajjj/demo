@@ -10,6 +10,23 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @discount_percent = 0
+    offer_valid = false
+    now = Time.now
+    @product.offers.each do |o|
+      if((now > o.start_time) and (now < o.end_time))
+        if o.repeat == 'daily'
+          if ((now > o.start_time.to_s(:time).to_time) and (now < o.start_time.to_s(:time).to_time + o.duration.send(o.duration_type) ))
+            offer_valid = true
+          end
+        elsif o.repeat == 'weekly'
+          if ((now.wday == o.start_time.wday) and (now > o.start_time.to_s(:time).to_time) and (now < o.start_time.to_s(:time).to_time + o.duration.send(o.duration_type) ))
+            offer_valid = true
+          end
+        end
+        @discount_percent = (o.discount_percent > @discount_percent) ? o.discount_percent : @discount_percent if offer_valid
+      end
+    end
   end
 
   # GET /products/new

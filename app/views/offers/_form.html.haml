@@ -1,0 +1,30 @@
+.form_cont
+  = simple_form_for @offer, html: { class: "form-horizontal", role: "form" } do |f|
+    -if @offer.errors.any?
+      .alert.alert-danger.alert-dismissable{role: "alert"}
+        %button.close{type: "button", data: {dismiss: "alert"} }
+          %span{aria: {hidden: "true"} } &times;
+          %span.sr-only Close
+        %h4= "#{pluralize(@offer.errors.count, "error")} prohibited this offer from being saved:"
+
+        %ul
+          - @offer.errors.full_messages.each do |msg|
+            %li= msg
+
+    .form-group
+      = f.association :product
+    .form-group
+      = f.input :discount_percent
+    .form-group
+      = f.input :start_time
+    .form-group
+      = f.input :duration, label: 'Duration (hours)'
+      = f.hidden_field :duration_type, value: 'hours'
+    .form-group
+      = f.label :repeat
+      = f.select :repeat, ['daily', 'weekly']
+    .form-group
+      = f.input :end_time
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit class: 'btn btn-primary'

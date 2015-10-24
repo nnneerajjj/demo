@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024060415) do
+ActiveRecord::Schema.define(version: 20151024074504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,20 @@ ActiveRecord::Schema.define(version: 20151024060415) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "offers", force: :cascade do |t|
+    t.integer  "product_id"
+    t.float    "discount_percent"
+    t.datetime "start_time"
+    t.integer  "duration"
+    t.string   "duration_type"
+    t.string   "repeat"
+    t.datetime "end_time"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "offers", ["product_id"], name: "index_offers_on_product_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "category_id"
@@ -93,6 +107,7 @@ ActiveRecord::Schema.define(version: 20151024060415) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "offers", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
   add_foreign_key "purchases", "products"

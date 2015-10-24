@@ -1,0 +1,24 @@
+.page-header
+  = link_to offers_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_offer_path(@offer), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show offer
+
+%dl.dl-horizontal
+  %dt Product:
+  %dd= @offer.product
+  %dt Discount percent:
+  %dd= @offer.discount_percent
+  %dt Start time:
+  %dd= @offer.start_time
+  %dt Duration:
+  %dd= @offer.duration
+  %dt Duration type:
+  %dd= @offer.duration_type
+  %dt Repeat:
+  %dd= @offer.repeat
+  %dt End time:
+  %dd= @offer.end_time
