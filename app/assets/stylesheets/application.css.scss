@@ -13,7 +13,11 @@
  *= require_tree .
  *= require_self
  */
- 
+ .form_cont{
+  margin: auto;
+  width: 50%;
+  min-width: 270px;
+ }
  .round-image{
     background-color: white;
     border: 1px solid #d9d9d9; 

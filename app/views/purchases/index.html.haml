@@ -1,0 +1,26 @@
+.page-header
+  = link_to new_purchase_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Purchase
+  %h1 Listing purchases
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th User
+        %th Product
+        %th Price
+        %th
+        %th
+        %th
+
+    %tbody
+      - @purchases.each do |purchase|
+        %tr
+          %td= purchase.user
+          %td= purchase.product
+          %td= purchase.price
+          %td= link_to 'Show', purchase
+          %td= link_to 'Edit', edit_purchase_path(purchase)
+          %td= link_to 'Destroy', purchase, data: { confirm: 'Are you sure?' }, method: :delete

@@ -66,3 +66,5 @@ gem 'aws-sdk-v1'
 
 ## For image resizing, depends on Imagemagick which is a C program
 gem "mini_magick"
+
+gem 'bootstrap-generators', '~> 3.3.4'

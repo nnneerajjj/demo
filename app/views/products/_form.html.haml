@@ -1,0 +1,37 @@
+.form_cont
+  = simple_form_for @product, html: { class: "form-horizontal", role: "form" } do |f|
+    -if @product.errors.any?
+      .alert.alert-danger.alert-dismissable{role: "alert"}
+        %button.close{type: "button", data: {dismiss: "alert"} }
+          %span{aria: {hidden: "true"} } &times;
+          %span.sr-only Close
+        %h4= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+
+        %ul
+          - @product.errors.full_messages.each do |msg|
+            %li= msg
+
+    .form-group
+      .col-sm-10
+        = f.association :category, class: 'form-control'
+    .form-group
+      .col-sm-10
+        = f.association :user, class: 'form-control'
+    .form-group
+      .col-sm-10
+        = f.input :title, class: 'form-control'
+    .form-group
+      .col-sm-10
+        = f.input :description, class: 'form-control'
+    .form-group
+      .col-sm-10
+        = f.input :stock, class: 'form-control'
+    .form-group
+      .col-sm-10
+        = f.input :price, class: 'form-control'
+    .form-group
+      .col-sm-10
+        = f.input :status, class: 'form-control'
+    .form-group
+      .col-sm-10
+        = f.submit class: 'btn btn-primary'
