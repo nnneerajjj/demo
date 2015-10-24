@@ -27,13 +27,29 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.new(purchase_params)
 
     respond_to do |format|
-      if @purchase.save
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
-        format.json { render :show, status: :created, location: @purchase }
+      
+      @error_msg = false
+      if @purchase.product.stock <= 0
+        @error_msg = "Product out of stock."
+      elsif @purchase.user.credits < @purchase.price
+        @error_msg = "Insufficient balance in your account."
       else
-        format.html { render :new }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
+        if @purchase.save
+          @purchase.product.stock -= 1
+          @purchase.product.save
+          @purchase.user.credits -= @purchase.price
+          @purchase.user.save
+          format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+          format.json { render :show, status: :created, location: @purchase }
+          format.js
+        else
+          format.html { render :new }
+          format.json { render json: @purchase.errors, status: :unprocessable_entity }
+          format.js
+        end
       end
+    
+      format.js
     end
   end
 

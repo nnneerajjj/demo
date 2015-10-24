@@ -1,0 +1,26 @@
+<div class="product_cont">
+  <div class="product_img_cont">
+    <%= link_to product do %>
+      <%= image_tag(product.picture.url(:thumb)) %>
+    <% end %>
+  </div>
+  <div class="category_name"><%= product.category.name %></div>
+  <div class="product_name">
+    <%= product.title %>
+  </div>
+  <div class="fifty">
+    Price: 
+    <% if discount_percent > 0 %>
+      <%= (product.price - ((product.price/100) * discount_percent)).round 2 %> <span class="struck_off">  
+    <% else %>
+      <span>
+    <% end %>
+      <%= product.price %>
+    </span>
+  </div>
+  <div class="fifty">
+    <% if discount_percent > 0 %>
+      Discount: <%= discount_percent %> %
+    <% end %>
+  </div>
+</div>

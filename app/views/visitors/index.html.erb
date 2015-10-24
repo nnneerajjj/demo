@@ -7,3 +7,20 @@
     <% end %>
   <% end %>
 </div>
+<br style="clear:both"/>
+<hr />
+<h3>Products on sale</h3>
+<p><%= @current_offers.count %> offers</p>
+<div class="products_cont">
+  <% @current_offers.each do |offer| %>
+    <%= render offer.product, {product: offer.product, discount_percent: offer.discount_percent} %>
+  <% end %>
+</div>
+<br style="clear:both"/>
+<hr />
+<h3>Latest products</h3>
+<div class="products_cont">
+  <% @latest_products.each do |product| %>
+    <%= render product, {product: product, discount_percent: product.discount_percent} %>
+  <% end %>
+</div>

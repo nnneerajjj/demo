@@ -5,24 +5,30 @@
   = link_to edit_product_path(@product), class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-pencil
     Edit
-  %h1 Show product
+  %h1 Product detail
 
-%dl.dl-horizontal
-  %dt Discount:
-  %dd= @discount_percent
-  %dt Picture
-  %dd= image_tag(@product.picture.url(:medium)) 
-  %dt Category:
-  %dd= @product.category
-  %dt User:
-  %dd= @product.user
-  %dt Title:
-  %dd= @product.title
-  %dt Description:
-  %dd= @product.description
-  %dt Stock:
-  %dd= @product.stock
-  %dt Price:
-  %dd= @product.price
-  %dt Status:
-  %dd= @product.status
+.products_cont_detail
+  .product_cont_detail
+    .img_cont_detail
+      = image_tag(@product.picture.url(:medium))
+    .category_name_detail=@product.category.name
+    %div= @product.title
+    %div= @product.description
+    %div 
+      Stock: 
+      #product_stock
+        = @product.stock
+    %div 
+      Price:
+      - if @discount_percent > 0
+        = (@product.price - ((@product.price/100) * @discount_percent)).round 2
+        %span.struck_off
+          = @product.price
+      - else
+        %span
+          = @product.price
+    %div
+      Added by:
+      = link_to @product.user.name, @product.user
+    .purchase_detail
+      = render 'purchases/form_ajax'

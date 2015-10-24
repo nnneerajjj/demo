@@ -10,23 +10,9 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @discount_percent = 0
-    offer_valid = false
-    now = Time.now
-    @product.offers.each do |o|
-      if((now > o.start_time) and (now < o.end_time))
-        if o.repeat == 'daily'
-          if ((now > o.start_time.to_s(:time).to_time) and (now < o.start_time.to_s(:time).to_time + o.duration.send(o.duration_type) ))
-            offer_valid = true
-          end
-        elsif o.repeat == 'weekly'
-          if ((now.wday == o.start_time.wday) and (now > o.start_time.to_s(:time).to_time) and (now < o.start_time.to_s(:time).to_time + o.duration.send(o.duration_type) ))
-            offer_valid = true
-          end
-        end
-        @discount_percent = (o.discount_percent > @discount_percent) ? o.discount_percent : @discount_percent if offer_valid
-      end
-    end
+    @discount_percent = @product.discount_percent
+    @effective_price = (@discount_percent > 0) ? (@product.price - ( ( @product.price / 100 ) * @discount_percent ) ).round(2) : @product.price
+    @purchase = @product.purchases.build(user_id: current_user.id, price: @effective_price)
   end
 
   # GET /products/new
@@ -44,6 +30,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     respond_to do |format|
+      @product.status = 'sale'
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
@@ -86,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:category_id, :user_id, :title, :description, :stock, :price, :status)
+      params.require(:product).permit(:category_id, :user_id, :title, :description, :stock, :price, :status, :picture)
     end
 end

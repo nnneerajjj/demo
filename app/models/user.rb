@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :products
+  has_many :purchases
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

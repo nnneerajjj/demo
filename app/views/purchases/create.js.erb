@@ -1,0 +1,16 @@
+<% if @error_msg %>
+  $('#purchase_notice').html('<%= @error_msg %>')
+  $('#purchase_notice').show();  
+  $('#purchase_btn').prop('disabled', true);
+<% else %>
+  $('#product_stock').text(<%= @purchase.product.stock %>);
+
+  <% if ((@purchase.product.stock > 0) &&  (@purchase.user.credits >= @purchase.price))%>
+    $('#purchase_btn').prop('disabled', false);
+  <% else %>
+    $('#purchase_btn').prop('disabled', true);
+  <% end %>
+
+  $('#purchase_notice').html('You have successfully purchased this product. <br>Your account balance is <%= @purchase.user.credits %> credits.')
+  $('#purchase_notice').show();
+<% end %>

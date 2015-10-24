@@ -16,3 +16,9 @@
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require_tree .
+$(document).ready(function(){
+  $('#purchase_btn').click(function(){
+    $(this).prop('disabled', true);
+  });
+});
+

@@ -1,0 +1,24 @@
+= form_for @purchase, remote: true, html: { class: "form-horizontal", role: "form" } do |f|
+  -if @purchase.errors.any?
+    .alert.alert-danger.alert-dismissable{role: "alert"}
+      %button.close{type: "button", data: {dismiss: "alert"} }
+        %span{aria: {hidden: "true"} } &times;
+        %span.sr-only Close
+      %h4= "#{pluralize(@purchase.errors.count, "error")} prohibited this purchase from being saved:"
+
+      %ul
+        - @purchase.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :user_id, valur: current_user.id
+  = f.hidden_field :product_id, valur: @product.id
+  = f.hidden_field :price, class: 'form-control'
+  .form-group
+    .col-sm-10
+      - if @purchase.product.stock <= 0
+        %button.btn.btn-warning Out of stock
+      - elsif current_user.credits < @effective_price
+        %button.btn.btn-warning Insufficient balance
+      - else
+        = f.submit class: 'btn btn-primary', id: 'purchase_btn', value: 'Purchase @ ' + @effective_price.to_s + ' credits'
+  #purchase_notice.alert.alert-success{style: 'display: none'}
