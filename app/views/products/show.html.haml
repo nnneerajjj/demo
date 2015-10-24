@@ -8,6 +8,8 @@
   %h1 Show product
 
 %dl.dl-horizontal
+  %dt Picture
+  %dd= image_tag(@product.picture.url(:medium)) 
   %dt Category:
   %dd= @product.category
   %dt User:
