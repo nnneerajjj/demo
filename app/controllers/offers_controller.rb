@@ -18,6 +18,7 @@ class OffersController < ApplicationController
     @offer = Offer.new
     authorize @offer
     @products = current_user.products
+    redirect_to new_product_path, notice: 'Please add a product before creating offer.' if @products.count == 0
   end
 
   # GET /offers/1/edit
