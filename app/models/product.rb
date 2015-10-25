@@ -4,6 +4,13 @@ class Product < ActiveRecord::Base
   has_many :offers
   has_many :purchases
   
+  validates :category, :presence => true
+  validates :user, :presence => true
+  validates :title, :presence => true
+  validates :stock, :presence => true, numericality: { only_integer: true, greater_than: 0 }
+  validates :price, :presence => true, numericality: { greater_than: 0 }
+  #validates :status, :presence => true
+  
   attr_accessor :discount_percent
 
   has_attached_file :picture, styles: { medium: "600x600>", thumb: "300x300>" }, default_url: "/images/missing_product.png", :storage => :s3, :s3_credentials => Proc.new{|a| a.instance.s3_credentials }, :s3_protocol => 'http'

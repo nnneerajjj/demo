@@ -1,0 +1,3 @@
+class PurchasePolicy < ApplicationPolicy
+
+end

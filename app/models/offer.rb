@@ -1,6 +1,13 @@
 class Offer < ActiveRecord::Base
   belongs_to :product
-
+  validates :product, :presence => true
+  validates :discount_percent, :presence => true, :numericality => { :greater_than => 0}
+  validates :start_time, :presence => true
+  validates :duration, :presence => true, :numericality => { :greater_than => 0}
+  validates :duration_type, :presence => true
+  validates :repeat, :presence => true
+  validates :end_time, :presence => true
+  
   def self.current_offers
     offers = self.where("start_time < ? AND end_time > ?", Time.now, Time.now)
     now = Time.now
