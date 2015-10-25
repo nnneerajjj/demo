@@ -33,5 +33,5 @@
       = link_to @product.user.name, @product.user
     %br
     .purchase_detail
-      - if current_user
+      - if current_user and current_user != @product.user
         = render 'purchases/form_ajax'
