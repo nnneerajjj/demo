@@ -23,6 +23,7 @@ class OffersController < ApplicationController
 
   # GET /offers/1/edit
   def edit
+    @products = current_user.products
   end
 
   # POST /offers
