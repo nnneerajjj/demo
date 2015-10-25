@@ -12,7 +12,7 @@
             %li= msg
 
     .form-group
-      = f.association :product
+      = f.association :product, collection: @products
     .form-group
       = f.input :discount_percent
     .form-group
