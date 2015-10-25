@@ -1,7 +1,8 @@
 .page-header
-  = link_to new_category_path, class: 'btn btn-primary' do
-    %span.glyphicon.glyphicon-plus
-    New Category
+  - if policy(Category).new?
+    = link_to new_category_path, class: 'btn btn-primary' do
+      %span.glyphicon.glyphicon-plus
+      New Category
   %h1 Listing categories
 
 .table-responsive
@@ -10,15 +11,17 @@
       %tr
         %th Name
         %th Description
-        %th
-        %th
-        %th
+        - if current_user.try(:admin?)
+          %th
+          %th
+          %th
 
     %tbody
       - @categories.each do |category|
         %tr
           %td= category.name
           %td= category.description
-          %td= link_to 'Show', category
-          %td= link_to 'Edit', edit_category_path(category)
-          %td= link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete
+          - if current_user.try(:admin?)
+            %td= link_to 'Show', category
+            %td= link_to 'Edit', edit_category_path(category)
+            %td= link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete

@@ -1,6 +1,29 @@
 <h3>User</h3>
 <p>Name: <%= @user.name if @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
-<div class="round-image round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></div>
-<div class="round-image round-image-300"><%= image_tag(current_user.avatar.url(:medium)) %></div>
+<p>Credits: <%= @user.credits %></p>
 <div class="round-image round-image-100"><%= image_tag(current_user.avatar.url(:thumb)) %></div>
+<br style="clear:both"/>
+<hr />
+<h3>Added products</h3>
+<div class="products_cont">
+  <% @added_products.each do |product| %>
+    <%= render product, {product: product, discount_percent: product.discount_percent} %>
+  <% end %>
+</div>
+<br style="clear:both"/>
+<hr />
+<h3>Sold products</h3>
+<div class="products_cont">
+  <% @sold_products.each do |product| %>
+    <%= render product, {product: product, discount_percent: product.discount_percent} %>
+  <% end %>
+</div>
+<br style="clear:both"/>
+<hr />
+<h3>Purchased products</h3>
+<div class="products_cont">
+  <% @purchased_products.each do |product| %>
+    <%= render product, {product: product, discount_percent: product.discount_percent} %>
+  <% end %>
+</div>

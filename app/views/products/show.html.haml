@@ -2,9 +2,10 @@
   = link_to products_path, class: 'btn btn-default' do
     %span.glyphicon.glyphicon-list-alt
     Back
-  = link_to edit_product_path(@product), class: 'btn btn-primary' do
-    %span.glyphicon.glyphicon-pencil
-    Edit
+  - if policy(@product).edit?
+    = link_to edit_product_path(@product), class: 'btn btn-primary' do
+      %span.glyphicon.glyphicon-pencil
+      Edit
   %h1 Product detail
 
 .products_cont_detail
@@ -30,5 +31,7 @@
     %div
       Added by:
       = link_to @product.user.name, @product.user
+    %br
     .purchase_detail
-      = render 'purchases/form_ajax'
+      - if current_user
+        = render 'purchases/form_ajax'

@@ -21,6 +21,17 @@
   <div class="fifty">
     <% if discount_percent > 0 %>
       Discount: <%= discount_percent %> %
+    <% end %>&nbsp;
+  </div>
+  <div class="fifty">
+    Stock: <%= product.stock %>
+  </div>
+  <div class="fifty">
+    <% if policy(product).edit? %>
+      <%= link_to 'Edit', edit_product_path(product) %>
+    <% end %>
+    <% if policy(product).destroy? %>
+      | <%= link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete %>
     <% end %>
   </div>
 </div>

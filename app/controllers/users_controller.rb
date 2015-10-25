@@ -10,6 +10,16 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     authorize @user
+    @added_products = @user.products
+    
+    @sold_products = Array.new
+    if @user.products.count
+      @user.products.each do |product|
+        product_sales = product.purchases.collect{|purchase| purchase.product} if product.purchases.count
+        product_sales.each{|product| @sold_products << product }
+      end
+    end
+    @purchased_products = (@user.purchases.count) ? @user.purchases.collect{|purchase| purchase.product} : Array.new
   end
 
   def update

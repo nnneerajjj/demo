@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   def show
     @discount_percent = @product.discount_percent
     @effective_price = (@discount_percent > 0) ? (@product.price - ( ( @product.price / 100 ) * @discount_percent ) ).round(2) : @product.price
-    @purchase = @product.purchases.build(user_id: current_user.id, price: @effective_price)
+    @purchase = @product.purchases.build(user_id: current_user.id, price: @effective_price) if current_user
   end
 
   # GET /products/new

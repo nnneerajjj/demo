@@ -1,9 +1,12 @@
 .page-header
-  = link_to new_product_path, class: 'btn btn-primary' do
-    %span.glyphicon.glyphicon-plus
-    New Product
+  - if policy(Product).new?
+    = link_to new_product_path, class: 'btn btn-primary' do
+      %span.glyphicon.glyphicon-plus
+      New Product
   %h1 Listing products
-
+  .products_cont
+    - @products.each do |product|
+      = render product, {product: product, discount_percent: product.discount_percent} 
 .table-responsive
   %table.table.table-striped.table-bordered.table-hover
     %thead
