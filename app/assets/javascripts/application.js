@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .
 $(document).ready(function(){
   $('#purchase_btn').click(function(){

@@ -14,9 +14,7 @@
     .form-group
       .col-sm-10
         = f.association :category, class: 'form-control'
-    .form-group
-      .col-sm-10
-        = f.association :user, class: 'form-control'
+        = f.hidden_field :user_id, value: current_user.id, class: 'form-control'
     .form-group
       .col-sm-10
         = f.input :title, class: 'form-control'
