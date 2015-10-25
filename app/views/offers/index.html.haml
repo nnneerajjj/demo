@@ -22,7 +22,7 @@
     %tbody
       - @offers.each do |offer|
         %tr
-          %td= offer.product
+          %td= offer.product.title
           %td= offer.discount_percent
           %td= offer.start_time
           %td= offer.duration

@@ -1,9 +1,11 @@
 <div class="product_cont">
-  <div class="product_img_cont">
-    <%= link_to product do %>
-      <%= image_tag(product.picture.url(:thumb)) %>
-    <% end %>
-  </div>
+  <%= link_to product do %>
+    <div class="product_img_cont">
+      
+        <%= image_tag(product.picture.url(:thumb)) %>
+      
+    </div>
+  <% end %>
   <div class="category_name"><%= product.category.name %></div>
   <div class="product_name">
     <%= product.title %>
